@@ -25,6 +25,11 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt -y install ansible
 ````
 
+CLEF CHMOD 0600
+
+ansible -i hosts -m ping agents
+ansible-playbook -i hosts --limit agents config-server.yaml
+
 
 ### Configure master
 ````
