@@ -3,17 +3,31 @@
   hosts: all
   gather_facts: false
   become: true
-
   vars:
+    package_name: "puppetserver"
+
   tasks:
+
   - name: Set a hostname 
     ansible.builtin.hostname:
       name: "{{ inventory_hostname }}.local.vm"
 
   - name: Build hosts file
-    lineinfile:
+    ansible.builtin.lineinfile:
       dest: /etc/hosts
       regexp: '.*{{ item }}$'
       line: '{{ hostvars[item].ansible_default_ipv4 }} {{item}}.local.vm'
       state: present
     with_items: '{{ groups["all"] }}'
+
+  - name: Restart service 
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: "{{ package_name }}"
+
+  - name: Enable service and ensure it is not masked
+    ansible.builtin.systemd:
+      name: "{{ package_name }}"
+      enabled: yes
+      masked: no
