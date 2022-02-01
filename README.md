@@ -51,6 +51,11 @@ sudo bash -c "sed -i 's/127.0.0.1 localhost/127.0.0.1 master.local.vm puppet loc
 sudo bash -c "echo '192.168.100.10 master.local.vm' >> /etc/hosts"
 sudo bash -c "echo '192.168.100.11 agent01.local.vm' >> /etc/hosts"
 
+
+
+
+
+
 # service 
 sudo systemctl restart puppetserver
 sudo systemctl enable puppetserver
