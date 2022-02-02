@@ -4,6 +4,8 @@ all:
     PUPPET:
       children:
         agents:
+          vars:
+            node_type: agent
           hosts:
             agent01:
               ansible_host: agent01
@@ -14,6 +16,8 @@ all:
               ansible_become_user: "root"
         servers:
           hosts:
+          vars:
+            node_type: master
             master:
               ansible_host: master
               ansible_default_ipv4: 192.168.100.10

@@ -1,0 +1,27 @@
+---
+- name: Install puppet 7
+  hosts: all
+  become: true
+  vars:
+    package_name: "puppetserver" 
+
+  tasks:
+  - name: Add certificate block for AGENT in puppet.conf
+    ansible.builtin.lineinfile:
+      dest: /etc/puppetlabs/puppet/puppet.conf
+      line: "{{ item }}"
+    with_items: 
+      - "[main]"
+      - "certname = {{ inventory_hostname }}.local.vm"
+      - "server = master.local.vm"
+    when: node_type == "agent"
+
+  - name: Add certificate block for MASTER in puppet.conf
+    ansible.builtin.lineinfile:
+      dest: /etc/puppetlabs/puppet/puppet.conf
+      line: "{{ item }}"
+    with_items: 
+      - "[main]"
+      - "certname = master.local.vm"
+      - "server = master.local.vm"
+    when: node_type == "master"
