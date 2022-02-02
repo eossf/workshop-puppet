@@ -12,13 +12,30 @@
     ansible.builtin.hostname:
       name: "{{ inventory_hostname }}.local.vm"
 
-  - name: Build hosts file
+  - name: Build AGENT hosts file for agents
     ansible.builtin.lineinfile:
       dest: /etc/hosts
       regexp: '.*{{ item }}$'
-      line: '{{ hostvars[item].ansible_default_ipv4 }} {{item}}'
+      line: '{{ hostvars[item].ansible_default_ipv4 }} {{item}}.local.vm'
       state: present
-    with_items: '{{ groups["all"] }}'
+    when: node_type == 'agent'
+    with_items: '{{ groups["agents"] }}'
+
+  - name: Build AGENT hosts file for masters
+    ansible.builtin.lineinfile:
+      dest: /etc/hosts
+      regexp: '.*{{ item }}$'
+      line: '{{ hostvars[item].ansible_default_ipv4 }} {{item}}.local.vm puppet'
+      state: present
+    when: node_type == 'agent'
+    with_items: '{{ groups["masters"] }}'
+
+  - name: Build MASTER hosts file for agents
+    ansible.builtin.lineinfile:
+      dest: /etc/hosts
+      line: '127.0.0.1 master.local.vm puppet'
+      state: present
+    when: node_type == 'master'
 
   - name: Restart service 
     ansible.builtin.systemd:
