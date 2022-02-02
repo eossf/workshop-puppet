@@ -15,21 +15,23 @@ Enfin l'agent reporte au master le resultat.
 
 
 ### Ansible
-
-install on master :
+Install
 
 ````
 sudo apt -y update
 sudo apt -y install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt -y install ansible
+ansible-galaxy role  init geerlingguy.ntp
+ansible-galaxy install galexrt.ansible-ntpdate
 ````
 
-CLEF CHMOD 0600
-
+?? CLEF CHMOD 0600 ??
+Ping agent and limit hosts
+````
 ansible -i hosts -m ping agents
-ansible-playbook -i hosts --limit agents config-server.yaml
-
+ansible-playbook -i hosts --limit agents 
+````
 
 ### Configure master
 ````
