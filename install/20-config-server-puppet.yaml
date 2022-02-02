@@ -32,11 +32,24 @@
       enabled: yes
       masked: no
 
-  - name: Ensure PATH is sourced from the .bashrc
+  - name: Ensure vagrant PATH is sourced from the .bashrc
     blockinfile:
       dest: "{{ lookup('env', 'HOME') }}/.bashrc"
       block: |
-        export PATH=$PATH:/opt/puppetlabs/puppet/bin
+        if [[ ":$PATH:" != *"puppetlabs"* ]]; then
+          export PATH=$PATH:/opt/puppetlabs/puppet/bin
+        fi
+      marker: '# {mark} ANSIBLE MANAGED BLOCK - path'
+      insertbefore: EOF
+      create: yes
+
+  - name: Ensure root PATH is sourced from the .bashrc
+    blockinfile:
+      dest: "/root/.bashrc"
+      block: |
+        if [[ ":$PATH:" != *"puppetlabs"* ]]; then
+          export PATH=$PATH:/opt/puppetlabs/puppet/bin
+        fi
       marker: '# {mark} ANSIBLE MANAGED BLOCK - path'
       insertbefore: EOF
       create: yes
