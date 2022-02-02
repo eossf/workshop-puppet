@@ -16,7 +16,7 @@
         line: "{{ item }}"
       with_items: 
         - "[main]"
-        - "certname = {{ inventory_hostname }}.local.vm"
+        - "certname = {{ inventory_hostname }}"
         - "server = master.local.vm"
       when: node_type == "agent"
 
