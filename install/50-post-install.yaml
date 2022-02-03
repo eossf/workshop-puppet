@@ -1,0 +1,10 @@
+---
+- name: Install useful tools
+  hosts: all
+  become: true
+  vars:
+  tasks:
+    - name: Install tree
+      apt:
+        name: "tree"
+        state: latest
