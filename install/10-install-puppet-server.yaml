@@ -2,10 +2,11 @@
 - name: Install puppet 7
   hosts: all
   become: true
-
+  gather_facts: true
   vars:
     package_deb: "puppet7-release-focal.deb"
     package_name: "puppetserver" 
+
   tasks:
   - name: Check if package is installed
     command: dpkg-query -W {{ package_name }}

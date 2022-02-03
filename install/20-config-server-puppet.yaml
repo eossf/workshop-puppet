@@ -1,13 +1,12 @@
 ---
 - name: Common config Agent | Master Server
   hosts: all
-  gather_facts: false
   become: true
+  gather_facts: false
   vars:
     package_name: "puppetserver"
 
   tasks:
-
   - name: Set a hostname 
     ansible.builtin.hostname:
       name: "{{ inventory_hostname }}.local.vm"

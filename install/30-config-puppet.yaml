@@ -2,6 +2,7 @@
 - name: Install puppet 7
   hosts: all
   become: true
+  gather_facts: false
   vars:
     package_name: "puppetserver" 
     ntp_timezone: Etc/UTC

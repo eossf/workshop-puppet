@@ -2,9 +2,43 @@
 - name: Install useful tools
   hosts: all
   become: true
+  gather_facts: false
   vars:
+    package_name: pdk
+    package_deb: puppet-tools-release-focal
+
   tasks:
     - name: Install tree
       apt:
         name: "tree"
         state: latest
+
+    - name: Check if package PDK is installed on AGENT
+      command: dpkg-query -W {{ package_name }}
+      register: check_deb
+      failed_when: check_deb.rc > 1
+      changed_when: check_deb.rc == 1
+      when: node_type == "agent"
+
+    - name: Download .deb package on AGENT
+      get_url: 
+        url="https://apt.puppet.com/{{ package_deb }}.deb"
+        dest="/tmp/{{ package_deb }}"
+      when: (node_type == "agent") and (check_deb.rc == 1)
+
+    - name: Dpkg -i puppet .deb
+      apt: 
+          deb: "/tmp/{{ package_deb }}"
+      when: (node_type == "agent") and (check_deb.rc == 1)
+
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+
+    - name: Install PDK on AGENT
+      apt:
+        name: "{{ package_name }}"
+        state: latest
+      when: node_type == "agent"
+
