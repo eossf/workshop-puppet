@@ -20,6 +20,15 @@
     when: node_type == 'agent'
     with_items: '{{ groups["agents"] }}'
 
+  - name: Build AGENT hosts file for master
+    ansible.builtin.lineinfile:
+      dest: /etc/hosts
+      regexp: '.*{{ item }}$'
+      line: '{{ hostvars[item].ansible_default_ipv4 }} {{item}}.local.vm'
+      state: present
+    when: node_type == 'master'
+    with_items: '{{ groups["agents"] }}'
+
   - name: Build AGENT hosts file for masters
     ansible.builtin.lineinfile:
       dest: /etc/hosts
