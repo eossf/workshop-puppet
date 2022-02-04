@@ -28,7 +28,7 @@ apt -y update
 apt -y install software-properties-common
 add-apt-repository --yes --update ppa:ansible/ansible
 apt -y install ansible
-ansible-galaxy role  init geerlingguy.ntp
+ansible-galaxy install geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
 ````
 
