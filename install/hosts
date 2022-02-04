@@ -8,7 +8,7 @@ all:
             node_type: agent
           hosts:
             agent01:
-              ansible_host: agent01
+              ansible_host: 192.168.100.11
               ansible_default_ipv4: 192.168.100.11
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_agent01"
@@ -19,7 +19,7 @@ all:
             node_type: master
           hosts:
             master:
-              ansible_host: master
+              ansible_host: 192.168.100.10
               ansible_default_ipv4: 192.168.100.10
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_master"
