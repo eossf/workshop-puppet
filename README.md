@@ -1,20 +1,24 @@
 # Install Puppet with Vagrant
 ## Image Bento 21.04
-dans /install
+Go into the folder /install
+````
 vagrant up
+````
 
 ## Description
-Puppet est un system client / server de gestion de configuration.
+Puppet is a client/server configuration manager.
 
-un daemon puppetserver est actif sur le master
-un daemon puppet (agent) est actif sur l'agent01
+This installation provides :
+    One daemon puppetserver est actif sur le master
+    One daemon puppet (agent) est actif sur l'agent01
 
-## workflow par defaut
-Par defaut l'agent toutes les 30' pousse ses facts au master, qui build un catalog, pousse ce catalog (qui peut declencher des installations/modifications sur l'hote de l'agent)
-Enfin l'agent reporte au master le resultat.
+## Puppet at a glance
+By default every 30' the node/agent push its facts to the master, which builds and push the dedicated catalog (modules for the node/agent), 
+Then the node/agent triggers tasks related to its own catalog.
+Finally, the node/agent returns a report to the master.
 
 ## Ansible
-Install
+Install ansible + ansible galaxy + roles
 
 ````
 sudo apt -y update
@@ -25,28 +29,40 @@ ansible-galaxy role  init geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
 ````
 
-Note : for ping agent and limit hosts
+### Tests
+For pinging agent and limit hosts
 ````
 ansible -i hosts -m ping agents
 ansible-playbook -i hosts --limit agents 
 ````
 
+### Install nodes
+Install one node/master
+````
+ansible-playbook -i hosts --limit masters 
+````
+
+Install one node/agent
+````
+ansible-playbook -i hosts --limit agents 
+````
+
 ### Connection Agent => Master - CA 
-On the master
-````
-# certificate
-# https://puppet.com/docs/puppet/7/ssl_regenerate_certificates.html
-
-sudo puppetserver ca list
-sudo puppetserver ca sign --all
-````
-
-On the agent
+On the client, request a connection 
 ````
 puppet agent --test
 ````
 
-verify
+On the master validate (sign) the CA requests
+````
+# certificate
+# https://puppet.com/docs/puppet/7/ssl_regenerate_certificates.html
+
+puppetserver ca list
+puppetserver ca sign --all
+````
+
+Verify the certificates
 ````
 # sudo puppetserver ca list --all
 Signed Certificates:
