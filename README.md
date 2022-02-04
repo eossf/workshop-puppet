@@ -21,10 +21,13 @@ Finally, the node/agent returns a report to the master.
 Install ansible + ansible galaxy + roles
 
 ````
-sudo apt -y update
-sudo apt -y install software-properties-common
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt -y install ansible
+git clone https://github.com/eossf/workshop-puppet
+cd workshop-puppet
+sudo su -
+apt -y update
+apt -y install software-properties-common
+add-apt-repository --yes --update ppa:ansible/ansible
+apt -y install ansible
 ansible-galaxy role  init geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
 ````
