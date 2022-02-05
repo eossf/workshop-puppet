@@ -27,9 +27,7 @@
   #     state: latest
 
   - name: Apt update
-    apt:
-      update_cache: yes
-      upgrade: 'yes'
+    command: "apt-get update -y"
 
   tasks:
   - name: "Dpkg -i {{ package_deb }}"
