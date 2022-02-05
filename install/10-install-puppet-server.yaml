@@ -33,7 +33,7 @@
 
   tasks:
   - name: "Dpkg -i {{ package_deb }}"
-    command: "dpkg -i {{ package_deb }}"
+    command: "dpkg -i ~/{{ package_deb }}"
 
   - name: Install puppetserver on MASTER
     apt:
