@@ -4,7 +4,7 @@
   become: true
   gather_facts: false
   vars:
-    package_name: pdk
+    package_name_pdk: pdk
     package_deb: puppet-tools-release-focal
 
   tasks:
@@ -14,7 +14,7 @@
         state: latest
 
     - name: Check if package PDK is installed on AGENT
-      command: dpkg-query -W {{ package_name }}
+      command: dpkg-query -W {{ package_name_pdk }}
       register: check_deb
       failed_when: check_deb.rc > 1
       changed_when: check_deb.rc == 1
@@ -38,7 +38,7 @@
 
     - name: Install PDK on AGENT
       apt:
-        name: "{{ package_name }}"
+        name: "{{ package_name_pdk }}"
         state: latest
       when: node_type == "agent"
 

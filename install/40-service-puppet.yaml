@@ -4,7 +4,6 @@
   become: true
   gather_facts: false
   vars:
-    package_name: "puppetserver" 
     ntp_timezone: Etc/UTC
     ntpdate_run: true
     ntpdate_runs: 1

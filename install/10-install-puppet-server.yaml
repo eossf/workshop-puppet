@@ -5,11 +5,12 @@
   gather_facts: true
   vars:
     package_deb: "puppet7-release-focal.deb"
-    package_name: "puppetserver" 
+    package_name_master: "puppetserver"
+    package_name_agent: "puppet-agent"
 
   tasks:
   - name: Check if package is installed
-    command: dpkg-query -W {{ package_name }}
+    command: dpkg-query -W {{ package_name_master }}
     register: check_deb
     failed_when: check_deb.rc > 1
     changed_when: check_deb.rc == 1
@@ -35,7 +36,14 @@
       deb: "~/{{ package_deb }}"
     when: check_deb.rc == 1
   
-  - name: Install puppetserver
+  - name: Install puppetserver on MASTER
     apt:
-      name: "{{ package_name }}"
+      name: "{{ package_name_master }}"
       state: latest
+    when: node_type == 'master'
+
+  - name: Install puppet-agent on AGENT
+    apt:
+      name: "{{ package_name_agent }}"
+      state: latest
+    when: node_type == 'agent'

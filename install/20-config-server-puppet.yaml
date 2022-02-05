@@ -4,7 +4,7 @@
   become: true
   gather_facts: false
   vars:
-    package_name: "puppetserver"
+    package_name_master: "puppetserver"
 
   tasks:
   - name: Set a hostname 
@@ -49,11 +49,11 @@
     ansible.builtin.systemd:
       state: restarted
       daemon_reload: yes
-      name: "{{ package_name }}"
+      name: "{{ package_name_master }}"
 
   - name: Enable service and ensure it is not masked
     ansible.builtin.systemd:
-      name: "{{ package_name }}"
+      name: "{{ package_name_master }}"
       enabled: yes
       masked: no
 
