@@ -40,7 +40,7 @@ all:
               ansible_become_user: "root"
     ZABBIX:
       children:
-        agents:
+        zabbix:
           vars:
             node_type: zabbix
           hosts:
