@@ -17,7 +17,7 @@
   - name: Download .deb package
     get_url: 
       url="http://apt.puppetlabs.com/{{ package_deb }}"
-      dest="/tmp/{{ package_deb }}"
+      dest="~/{{ package_deb }}"
     when: check_deb.rc == 1
 
   - name: Upgrade all packages to the latest version
@@ -27,11 +27,10 @@
 
   - name: Dpkg -i puppet .deb
     apt: 
-      deb: "/tmp/{{ package_deb }}"
+      deb: "~/{{ package_deb }}"
     when: check_deb.rc == 1
   
   - name: Install puppetserver
     apt:
       name: "{{ package_name }}"
       state: latest
-

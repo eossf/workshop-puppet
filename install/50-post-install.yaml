@@ -23,12 +23,12 @@
     - name: Download .deb package on AGENT
       get_url: 
         url="https://apt.puppet.com/{{ package_deb }}.deb"
-        dest="/tmp/{{ package_deb }}"
+        dest="~/{{ package_deb }}"
       when: (node_type == "agent") and (check_deb.rc == 1)
 
     - name: Dpkg -i puppet .deb
       apt: 
-          deb: "/tmp/{{ package_deb }}"
+          deb: "~/{{ package_deb }}"
       when: (node_type == "agent") and (check_deb.rc == 1)
 
     - name: Upgrade all packages to the latest version
