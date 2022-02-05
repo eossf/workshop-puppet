@@ -34,7 +34,6 @@
   tasks:
   - name: "Dpkg -i {{ package_deb }}"
     command: "dpkg -i {{ package_deb }}"
-    when: check_deb.rc == 1
 
   - name: Install puppetserver on MASTER
     apt:
