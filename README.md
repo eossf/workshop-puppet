@@ -52,12 +52,6 @@ scp -i master.local.vm/virtualbox/private_key -P 2222 agent01.local.vm/virtualbo
 scp -i master.local.vm/virtualbox/private_key -P 2222 agent02.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent02
 scp -i master.local.vm/virtualbox/private_key -P 2222 master.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_master
 ssh -i master.local.vm/virtualbox/private_key -p 2222 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
-
-# copy to if ansible is installed on agent 
-scp -i agent01.local.vm/virtualbox/private_key -P 2200 agent01.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent01
-scp -i agent02.local.vm/virtualbox/private_key -P 2201 agent02.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent02
-scp -i agent01.local.vm/virtualbox/private_key -P 2200 master.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_master
-ssh -i agent01.local.vm/virtualbox/private_key -p 2200 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
 ````
 
 ### Tests

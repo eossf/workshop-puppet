@@ -21,10 +21,10 @@
       dest="~/{{ package_deb }}"
     when: check_deb.rc == 1
 
-  - name: Upgrade all packages to the latest version
-    apt:
-      name: "*"
-      state: latest
+  # - name: Upgrade all packages to the latest version
+  #   apt:
+  #     name: "*"
+  #     state: latest
 
   - name: Apt update
     apt:
