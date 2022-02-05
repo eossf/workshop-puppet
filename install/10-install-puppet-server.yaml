@@ -31,11 +31,11 @@
       update_cache: yes
       upgrade: 'yes'
 
-  - name: Dpkg -i puppet .deb
-    apt: 
-      deb: "~/{{ package_deb }}"
+  tasks:
+  - name: "Dpkg -i {{ package_deb }}"
+    command: "dpkg -i {{ package_deb }}"
     when: check_deb.rc == 1
-  
+
   - name: Install puppetserver on MASTER
     apt:
       name: "{{ package_name_master }}"
