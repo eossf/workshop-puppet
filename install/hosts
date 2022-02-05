@@ -8,6 +8,8 @@ all:
             node_type: agent
           hosts:
             agent01:
+              ansible_system: 'Linux'
+              ansible_os_family: 'Debian'
               ansible_host: 192.168.100.11
               ansible_default_ipv4: 192.168.100.11
               ansible_ssh_user: "vagrant"
@@ -19,6 +21,8 @@ all:
             node_type: master
           hosts:
             master:
+              ansible_system: 'Linux'
+              ansible_os_family: 'Debian'
               ansible_host: 192.168.100.10
               ansible_default_ipv4: 192.168.100.10
               ansible_ssh_user: "vagrant"
