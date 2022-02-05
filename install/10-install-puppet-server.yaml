@@ -24,7 +24,12 @@
     apt:
       update_cache: yes
       upgrade: 'yes'
-      
+
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+
   - name: Dpkg -i puppet .deb
     apt: 
       deb: "~/{{ package_deb }}"
