@@ -9,29 +9,22 @@
     package_name_agent: "puppetserver"
 
   tasks:
-  - name: Check if package is installed
-    command: dpkg-query -W {{ package_name_master }}
-    register: check_deb
-    failed_when: check_deb.rc > 1
-    changed_when: check_deb.rc == 1
-
-  - name: Download .deb package
+  - name: "Download {{ package_deb }} package"
     get_url: 
       url="http://apt.puppetlabs.com/{{ package_deb }}"
       dest="~/{{ package_deb }}"
-    when: check_deb.rc == 1
 
   # - name: Upgrade all packages to the latest version
   #   apt:
   #     name: "*"
   #     state: latest
 
-  - name: Apt update
-    command: "apt-get update -y"
-
   tasks:
   - name: "Dpkg -i {{ package_deb }}"
     command: "dpkg -i ~/{{ package_deb }}"
+
+  - name: "Apt update {{ package_name_master }}"
+    command: "apt-get update -y"
 
   - name: Install puppetserver on MASTER
     apt:

@@ -27,9 +27,9 @@ Connection to the master with ssh -p 2222 vagrant@localhost
 Password: vagrant
 ````
 sudo su -
-apt -y update
 apt -y install software-properties-common
 add-apt-repository --yes --update ppa:ansible/ansible
+apt -y update
 apt -y install ansible
 ansible-galaxy install geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
@@ -45,7 +45,7 @@ cd workshop-puppet
 These generated keys must be copied to the ansible machine
 Return back on your desktop computer
 ````
-cd install/.vagrant/machines/
+cd workshop-puppet/install/.vagrant/machines/
 
 # copy for ansible installed on master
 scp -i master.local.vm/virtualbox/private_key -P 2222 agent01.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent01
@@ -55,7 +55,7 @@ ssh -i master.local.vm/virtualbox/private_key -p 2222 vagrant@localhost "sudo ch
 ````
 
 ### Tests
-Connect to the ansible, for pinging agent and limit hosts
+Connect to the ansible machine, for pinging agent and limit hosts
 ````
 sudo su -
 cd ~/workshop-puppet/install
