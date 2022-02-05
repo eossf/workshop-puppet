@@ -14,10 +14,10 @@
       url="http://apt.puppetlabs.com/{{ package_deb }}"
       dest="~/{{ package_deb }}"
 
-  # - name: Upgrade all packages to the latest version
-  #   apt:
-  #     name: "*"
-  #     state: latest
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
 
   - name: "Dpkg -i {{ package_deb }}"
     command: "dpkg -i ~/{{ package_deb }}"
