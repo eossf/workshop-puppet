@@ -6,7 +6,7 @@
   vars:
     package_deb: "puppet7-release-focal.deb"
     package_name_master: "puppetserver"
-    package_name_agent: "puppet-agent"
+    package_name_agent: "puppetserver"
 
   tasks:
   - name: Check if package is installed
