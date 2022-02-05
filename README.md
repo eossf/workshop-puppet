@@ -44,31 +44,45 @@ cd install/.vagrant/machines/
 
 # copy to agent 
 scp -i agent01.local.vm/virtualbox/private_key -P 2200 agent01.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent01
+scp -i agent02.local.vm/virtualbox/private_key -P 2200 agent02.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent02
 scp -i agent01.local.vm/virtualbox/private_key -P 2200 master.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_master
 ssh -i agent01.local.vm/virtualbox/private_key -p 2200 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
 # copy to master
 scp -i master.local.vm/virtualbox/private_key -P 2222 agent01.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent01
+scp -i master.local.vm/virtualbox/private_key -P 2200 agent02.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent02
 scp -i master.local.vm/virtualbox/private_key -P 2222 master.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_master
 ssh -i master.local.vm/virtualbox/private_key -p 2222 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
 ````
 
 ### Tests
-For pinging agent and limit hosts
+Connect to the ansible, for pinging agent and limit hosts
 ````
-cd workshop-puppet/install
+sudo su -
+cd ~/workshop-puppet/install
 export ANSIBLE_HOST_KEY_CHECKING=false
-ansible -i hosts -m ping agents
+ansible -i hosts -m ping all
 ````
 
 ### Puppet : Install nodes
 Install one node/master
+
 ````
-ansible-playbook -i hosts --limit masters 
+cd ~/workshop-puppet/install
+ansible-playbook -i hosts --limit masters 10-install-puppet-server.yaml
+ansible-playbook -i hosts --limit masters 20-config-server-puppet.yaml
+ansible-playbook -i hosts --limit masters 30-config-puppet.yaml
+ansible-playbook -i hosts --limit masters 40-service-puppet.yaml
+ansible-playbook -i hosts --limit masters 50-post-install.yaml
 ````
 
 Install one node/agent
 ````
-ansible-playbook -i hosts --limit agents 
+cd ~/workshop-puppet/install
+ansible-playbook -i hosts --limit agents 10-install-puppet-server.yaml
+ansible-playbook -i hosts --limit agents 20-config-server-puppet.yaml
+ansible-playbook -i hosts --limit agents 30-config-puppet.yaml
+ansible-playbook -i hosts --limit agents 40-service-puppet.yaml
+ansible-playbook -i hosts --limit agents 50-post-install.yaml
 ````
 
 ### Connection Agent => Master - CA 
