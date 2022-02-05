@@ -19,7 +19,6 @@
   #     name: "*"
   #     state: latest
 
-  tasks:
   - name: "Dpkg -i {{ package_deb }}"
     command: "dpkg -i ~/{{ package_deb }}"
 
