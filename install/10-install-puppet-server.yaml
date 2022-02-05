@@ -20,11 +20,11 @@
       dest="~/{{ package_deb }}"
     when: check_deb.rc == 1
 
-  - name: Upgrade all packages to the latest version
+  - name: Apt update
     apt:
-      name: "*"
-      state: latest
-
+      update_cache: yes
+      upgrade: 'yes'
+      
   - name: Dpkg -i puppet .deb
     apt: 
       deb: "~/{{ package_deb }}"
