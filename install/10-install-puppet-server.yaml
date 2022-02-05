@@ -36,3 +36,8 @@
       name: "{{ package_name_agent }}"
       state: latest
     when: node_type == 'agent'
+
+  - name: Install ntpupdate
+    apt:
+      name: ntpdate
+      state: present
