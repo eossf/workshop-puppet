@@ -1,20 +1,12 @@
 ---
-- name: Install useful tools
+- name: Post-Install useful tools
   hosts: all
   become: true
   gather_facts: false
   vars:
-    package_name_pdk: pdk
 
   tasks:
     - name: Install tree
       apt:
         name: "tree"
         state: latest
-
-    - name: Install PDK on AGENT
-      apt:
-        name: "{{ package_name_pdk }}"
-        state: latest
-      when: node_type == "agent"
-

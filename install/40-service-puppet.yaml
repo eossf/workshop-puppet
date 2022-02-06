@@ -1,5 +1,5 @@
 ---
-- name: Install puppet 7
+- name: Restart puppet service and select agent or master
   hosts: all
   become: true
   gather_facts: false

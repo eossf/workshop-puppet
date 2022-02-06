@@ -1,24 +1,18 @@
 # Install Puppet with Vagrant
-## Image Bento 21.04
-Go into the folder /install
-On your desktop computer
-````
-vagrant up
-````
-
-## Description
 Puppet is a client/server configuration manager.
-
 This installation provides :
-    One daemon puppetserver est actif sur le master
-    One daemon puppet (agent) est actif sur l'agent01
+ - 1 puppetserver on the master (master)
+ - 1 node with puppet agent (agent01)
+ - 1 node with puppet agent (agent02) + after a zabbix agent
+ - 1 zabbix server (zabbix)
 
-## Puppet at a glance
-By default every 30' the node/agent push its facts to the master, which builds and push the dedicated catalog (modules for the node/agent), 
-Then the node/agent triggers tasks related to its own catalog.
+The scenario is : 
+Once running, the puppet master will be configured to command to agent02 to install an "Zabbix agent 2"
+
+By default every 30' the node/agent push its facts to the master, which builds and push the dedicated catalog (modules for the node/agent), then the node/agent triggers tasks related to its own catalog.
 Finally, the node/agent returns a report to the master.
 
-## Ansible installation - workshop-puppet
+## Step 1 - Ansible installation
 Install ansible + ansible galaxy + roles
 It is possible to install ansible on another machine or directly on the master.
 
@@ -35,13 +29,14 @@ ansible-galaxy install geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
 ````
 
-### Install project
+### Step 2 - Install workshop-puppet project
 ````
 git clone https://github.com/eossf/workshop-puppet
 cd workshop-puppet
 ````
 
-### keys for workshop-puppet
+### Step 3 - Install Puppet
+keys for workshop-puppet
 These generated keys must be copied to the ansible machine
 Return back on your desktop computer
 ````
@@ -54,7 +49,7 @@ scp -i master.local.vm/virtualbox/private_key -P 2222 master.local.vm/virtualbox
 ssh -i master.local.vm/virtualbox/private_key -p 2222 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
 ````
 
-### Tests
+#### Tests
 Connect to the ansible machine, for pinging agent and limit hosts
 ````
 sudo su -
@@ -63,7 +58,7 @@ export ANSIBLE_HOST_KEY_CHECKING=false
 ansible -i hosts -m ping all
 ````
 
-### Puppet : Install nodes
+#### Puppet : Install nodes
 Install one node/master
 
 ````
@@ -85,7 +80,7 @@ ansible-playbook -i hosts --limit agents 40-service-puppet.yaml
 ansible-playbook -i hosts --limit agents 50-post-install.yaml
 ````
 
-### Connection Agent => Master - CA 
+#### Connection Agent => Master - CA 
 On the client, request a connection 
 ````
 puppet agent --test

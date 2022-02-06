@@ -1,5 +1,5 @@
 ---
-- name: Common config Agent | Master Server
+- name: Config puppet Agent | Master
   hosts: all
   become: true
   gather_facts: false

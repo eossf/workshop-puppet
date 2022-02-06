@@ -1,5 +1,5 @@
 ---
-- name: Install puppet 7
+- name: Config ntp and certificate for puppet 7
   hosts: all
   become: true
   gather_facts: false
