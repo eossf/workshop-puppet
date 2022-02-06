@@ -29,6 +29,7 @@
       name: "{{ item }}"
       state: latest
     with_items: 
+      - "libsnmp-dev"
       - "snmpd"
       - "zabbix-server-mysql"
       - "zabbix-frontend-php"
