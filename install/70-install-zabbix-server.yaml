@@ -6,7 +6,6 @@
   vars:
     package_deb: zabbix-release_5.4-1+ubuntu20.04_all.deb
     package_name: zabbix
-  when: node_type == "zabbix"
 
   tasks:
   - name: "Download {{ package_deb }} package"
