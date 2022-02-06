@@ -6,11 +6,20 @@ This installation provides :
  - 1 node with puppet agent (agent02) + after a zabbix agent
  - 1 zabbix server (zabbix)
 
-The scenario is : 
-Once running, the puppet master will be configured to command to agent02 to install an "Zabbix agent 2"
+## Use Case expected
+Once everything is installed and running : 
+ - agent02 directly install "zabbix agent 2", remove. Test
+ - the puppet master will be configured to install automatically on agent02. Test
+ - zabbix server test installation and configuration
+ - "zabbix agent 2" modification (add encrypted communication)
+ - "zabbix agent 2" installed and contact server. Test and confirmation agent call de zabbix frontend api
 
-By default every 30' the node/agent push its facts to the master, which builds and push the dedicated catalog (modules for the node/agent), then the node/agent triggers tasks related to its own catalog.
-Finally, the node/agent returns a report to the master.
+By default every 30' the node/agent push its facts to the master, which builds and push the dedicated catalog (modules for the node/agent), then the node/agent triggers tasks related to its own catalog. Finally, the node/agent returns a report to the master.
+
+It is possible to test agent configuration directly by the command:
+````
+puppet agent -t
+````
 
 ## Step 1 - Ansible installation
 Install ansible + ansible galaxy + roles
