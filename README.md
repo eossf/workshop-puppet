@@ -132,7 +132,7 @@ puppetserver ca clean --certname agent01.local.vm
 ## Development / PDK
 ````
 wget https://apt.puppet.com/puppet-tools-release-focal.deb
-sudo dpkg -i puppet-tools-release-focal.deb
-sudo apt-get -y update
-sudo apt-get -y install pdk
+dpkg -i puppet-tools-release-focal.deb
+apt-get -y update
+apt-get -y install pdk
 ````
