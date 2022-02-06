@@ -103,6 +103,23 @@ master.local.vm        (SHA256)  E7:F8:D5:C4:27:EF:44:51:54:4F:CD:E6:48:BA:68:47
 agent01.local.vm       (SHA256)  B2:04:42:B5:F5:F5:46:0F:27:8E:63:72:D5:B5:87:71:35:4B:9F:0F:9D:FE:B6:5B:DC:DE:4E:A8:8F:D6:92:17 alt names: ["DNS:agent01.local.vm"]
 ````
 
+Remove certificate agent01 (for example)
+````
+cd /etc/puppetlabs/puppet/ssl
+tree
+sudo rm private_keys/agent01.local.vm.pem public_keys/agent01.local.vm.pem crl.pem certs/ca.pem certs/agent01.local.vm certificate_requests/agent01.local.vm.pem
+
+cd ~/.puppetlabs/etc/puppet/ssl
+tree
+rm private_keys/agent01.local.vm.pem crl.pem certs/ca.pem certs/agent01.local.vm.pem certificate_requests/agent01.local.vm.pem
+````
+
+on the server
+````
+puppetserver ca revoke --certname agent01.local.vm
+puppetserver ca clean --certname agent01.local.vm
+````
+
 ## Development / PDK
 ````
 wget https://apt.puppet.com/puppet-tools-release-focal.deb
