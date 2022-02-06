@@ -4,12 +4,29 @@
   become: true
   gather_facts: false
   vars:
-    package_name_pdk: pdk
+    packge_deb: puppet-tools-release-focal.deb
+    package_name: pdk
 
   tasks:
-    - name: Install PDK on AGENT
-      apt:
-        name: "{{ package_name_pdk }}"
-        state: latest
-      when: node_type == "agent"
+  - name: "Download {{ package_deb }} package"
+    get_url: 
+      url="https://apt.puppet.com/{{ package_deb }}"
+      dest="~/{{ package_deb }}"
 
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+
+  - name: "Dpkg -i {{ package_deb }}"
+    command: "dpkg -i ~/{{ package_deb }}"
+
+  - name: "Apt update"
+    command: "apt-get update -y"
+
+  - name: "Install {{ package_name }}"
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items: 
+      - "pdk"
