@@ -16,7 +16,7 @@ all:
               ansible_ssh_private_key_file: "private_key_agent01"
               ansible_become: true
               ansible_become_user: "root"
-            agent02: # agent puppet + zabbix
+            agent02: # puppet agent + zabbix agent
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
               ansible_host: 192.168.100.12
@@ -40,16 +40,29 @@ all:
               ansible_become_user: "root"
     ZABBIX:
       children:
-        zabbix:
+        zabbix-agents:
           vars:
-            node_type: zabbix
+            node_type: agent
           hosts:
-            zabbix:
+            zabbix-agent:
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
               ansible_host: 192.168.100.12
               ansible_default_ipv4: 192.168.100.12
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_agent02"
+              ansible_become: true
+              ansible_become_user: "root"
+        zabbix-servers:
+          vars:
+            node_type: server
+          hosts:
+            zabbix-server:
+              ansible_system: 'Linux'
+              ansible_os_family: 'Debian'
+              ansible_host: 192.168.100.13
+              ansible_default_ipv4: 192.168.100.13
+              ansible_ssh_user: "vagrant"
+              ansible_ssh_private_key_file: "private_key_server"
               ansible_become: true
               ansible_become_user: "root"
