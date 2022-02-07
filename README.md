@@ -36,6 +36,7 @@ apt -y update
 apt -y install ansible
 ansible-galaxy install geerlingguy.ntp
 ansible-galaxy install galexrt.ansible-ntpdate
+ansible-galaxy collection install community.mysql
 ````
 
 ### Step 2 - Install workshop-puppet project
