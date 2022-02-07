@@ -2,10 +2,15 @@
 - name: Condifure Zabbix MariaDB
   hosts: all
   become: true
-  gather_facts: true
+  gather_facts: false
   vars:
 
   tasks:
+  - name: Make sure pymysql is present
+    pip:
+      name: pymysql
+      state: present
+
   - name: Create a new database 'zabbix'
     community.mysql.mysql_db:
       name: zabbix
