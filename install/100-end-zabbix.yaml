@@ -20,3 +20,27 @@
       path: /etc/zabbix/apache.conf
       regexp: '# php_value date.timezone Europe/Riga'
       replace: 'php_value date.timezone UTC'
+
+  - name: Restart service zabbix-server
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: "zabbix-server"
+
+  - name: Enable service zabbix-server
+    ansible.builtin.systemd:
+      name: "zabbix-server"
+      enabled: yes
+      masked: no
+
+  - name: Restart service apache2 
+    ansible.builtin.systemd:
+      state: restarted
+      daemon_reload: yes
+      name: "apache2"
+
+  - name: Enable service apache2 
+    ansible.builtin.systemd:
+      name: "apache2"
+      enabled: yes
+      masked: no
