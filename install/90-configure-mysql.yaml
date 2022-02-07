@@ -6,6 +6,11 @@
   vars:
 
   tasks:
+  - name: Install Pip
+    pip:
+      name: pip
+      state: present
+  
   - name: Make sure pymysql is present
     pip:
       name: pymysql
