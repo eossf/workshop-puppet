@@ -5,7 +5,7 @@
   gather_facts: true
   vars:
     package_name: "MariaDB"
-    package_version: "10.6"
+    package_version: "10.5"
 
   tasks:
   - name: "Install dependencies for {{ package_name }} {{ package_version }}"
