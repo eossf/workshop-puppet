@@ -32,9 +32,12 @@
       priv: '*.*:ALL,GRANT'
       state: present
 
+  - name: "Copy gzip file"
+    command: "cp /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz ~/create.sql.gz"
+
   - name: "Uncompress gzip file"
-    command: "gunzip /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz"
+    command: "gunzip ~/create.sql.gz"
 
   - name: "Add zabbix data"
-    command: "mysql -uzabbix -p zabbix < /usr/share/doc/zabbix-sql-scripts/mysql/create.sql"
+    command: "mysql -uzabbix -p zabbix < ~/create.sql"
 
