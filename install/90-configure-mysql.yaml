@@ -18,14 +18,14 @@
 
   - name: Create a new database 'zabbix'
     community.mysql.mysql_db:
-      name: zabbix
+      name: root
       encoding: utf8
       collation: utf8_bin
       state: present
 
   - name: Create user 'zabbix' password 'zabbix' with all database privileges
     community.mysql.mysql_user:
-      name: bob
+      name: zabbix
       password: zabbix
       priv: '*.*:ALL,GRANT'
       state: present
