@@ -46,7 +46,7 @@ cd workshop-puppet
 
 ### Step 3 - Install Puppet
 keys for workshop-puppet
-These generated keys must be copied to the ansible machine
+These generated keys __ MUST BE __ copied to the ansible machine
 Return back on your desktop computer
 ````
 cd workshop-puppet/install/.vagrant/machines/
