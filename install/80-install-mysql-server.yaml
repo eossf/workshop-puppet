@@ -21,18 +21,23 @@
     command: "apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'"
 
   - name: "Add {{ package_name }} {{ package_version }} repository"
-    command: add-apt-repository "deb [arch=amd64,arm64,ppc64el,s390x] https://mirror.mva-n.net/mariadb/repo/{{ package_version }}/ubuntu focal main"
+    command: "add-apt-repository 'deb [arch=amd64,arm64,ppc64el,s390x] https://mirror.mva-n.net/mariadb/repo/{{ package_version }}/ubuntu focal main'"
 
   - name: Apt update
     apt: update_cache=yes   
     ignore_errors: yes  
 
   - name: "Install {{ package_name }} {{ package_version }} Server"
-    apt: name=mariadb-server state=latest
+    apt:
+      name: "mariadb-server-{{ package_version}}"
+      state: "latest"
 
   - name: "Install {{ package_name }} {{ package_version }} Client"
-    apt: name=mariadb-client state=latest
+    apt: 
+      name: "mariadb-client-{{ package_version}}"
+      state: "latest"
 
   - name: "Restart {{ package_name }} {{ package_version }}"
-    service: name=mysql state=restarted
-
+    service: 
+      name: mysql 
+      state: restarted
