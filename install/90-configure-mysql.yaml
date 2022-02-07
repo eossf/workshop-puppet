@@ -1,5 +1,5 @@
 ---
-- name: Condifure Zabbix MariaDB
+- name: Configure Zabbix MariaDB
   hosts: all
   become: true
   gather_facts: false
@@ -18,7 +18,7 @@
 
   - name: Create a new database 'zabbix'
     community.mysql.mysql_db:
-      name: root
+      name: zabbix
       login_unix_socket: /var/run/mysqld/mysqld.sock
       encoding: utf8
       collation: utf8_bin
@@ -33,10 +33,10 @@
       state: present
 
   - name: "Copy gzip file"
-    command: "cp /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz ~/create.sql.gz"
+    command: "cp -f /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz ~/create.sql.gz"
 
   - name: "Uncompress gzip file"
-    command: "gunzip ~/create.sql.gz"
+    command: "gunzip -f ~/create.sql.gz"
 
   - name: "Add zabbix data"
     command: "mysql -uzabbix -p zabbix < ~/create.sql"
