@@ -38,10 +38,7 @@
   - name: "Uncompress gzip file"
     command: "gunzip -f ~/create.sql.gz"
 
-#  - name: "Add zabbix data"
-#    command: "mysql -uzabbix -pzabbix --database zabbix < ~/create.sql"
-
-  - name: Create user 'zabbix' password 'zabbix' with all database privileges
+  - name: Import database create.sql
     community.mysql.mysql_db:
       name: zabbix
       login_unix_socket: /var/run/mysqld/mysqld.sock
