@@ -1,0 +1,23 @@
+---
+- name: Install MariaDB Server
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    package_name: "MariaDB"
+    package_version: "10.6"
+
+  tasks:
+  - name: Create a new database 'zabbix'
+    community.mysql.mysql_db:
+      name: zabbix
+      encoding: utf8
+      collation: utf8_bin
+      state: present
+
+  - name: Create user 'zabbix' password 'zabbix' with all database privileges
+    community.mysql.mysql_user:
+      name: bob
+      password: zabbix
+      priv: '*.*:ALL,GRANT'
+      state: present
