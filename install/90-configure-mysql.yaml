@@ -31,3 +31,6 @@
       password: zabbix
       priv: '*.*:ALL,GRANT'
       state: present
+
+  - name: "Add zabbix data"
+    command: "zcat /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz | mysql -uzabbix -p zabbix "
