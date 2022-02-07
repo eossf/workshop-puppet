@@ -23,7 +23,7 @@ servers=[
   {
     :hostname => "zabbix.local.vm",
     :ip => "192.168.100.13",
-    :box => "focal/ubuntu-20.04",
+    :box => "bento/ubuntu-20.04",
     :ram => 4096,
     :cpu => 1
   }

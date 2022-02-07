@@ -55,6 +55,8 @@ cd workshop-puppet/install/.vagrant/machines/
 scp -i master.local.vm/virtualbox/private_key -P 2222 agent01.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent01
 scp -i master.local.vm/virtualbox/private_key -P 2222 agent02.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_agent02
 scp -i master.local.vm/virtualbox/private_key -P 2222 master.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_master
+scp -i master.local.vm/virtualbox/private_key -P 2222 zabbix.local.vm/virtualbox/private_key vagrant@localhost:~/private_key_zabbix
+
 ssh -i master.local.vm/virtualbox/private_key -p 2222 vagrant@localhost "sudo chmod 0600 ~/private_key*; sudo mv ~/private_key*  /root/workshop-puppet/install"
 ````
 
@@ -129,10 +131,13 @@ puppetserver ca revoke --certname agent01.local.vm
 puppetserver ca clean --certname agent01.local.vm
 ````
 
+## Install Zabbix
+### Step 1 - install zabbix server
+````
+ansible-playbook -i hosts --limit zabbix-server 70-install-zabbix-server.yaml
+````
+
 ## Development / PDK
 ````
-wget https://apt.puppet.com/puppet-tools-release-focal.deb
-dpkg -i puppet-tools-release-focal.deb
-apt-get -y update
-apt-get -y install pdk
+ansible-playbook -i hosts --limit master 60-install-pdk.yaml
 ````
