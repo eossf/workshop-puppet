@@ -134,7 +134,7 @@ puppetserver ca clean --certname agent01.local.vm
 ## Install Zabbix
 ### Step 1 - install zabbix server
 ````
-ansible-playbook -i hosts --limit zabbix-server 70-install-zabbix-server.yaml
+ansible-playbook -i hosts --limit zabbix_server 70-install-zabbix-server.yaml
 ````
 
 ## Development / PDK
