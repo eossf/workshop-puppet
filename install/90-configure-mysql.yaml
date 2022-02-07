@@ -1,11 +1,9 @@
 ---
-- name: Install MariaDB Server
+- name: Condifure Zabbix MariaDB
   hosts: all
   become: true
   gather_facts: true
   vars:
-    package_name: "MariaDB"
-    package_version: "10.6"
 
   tasks:
   - name: Create a new database 'zabbix'
