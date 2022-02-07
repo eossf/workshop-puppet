@@ -7,10 +7,15 @@
 
   tasks:
   - name: Install Pip
-    pip:
+    apt:
       name: pip
       state: present
   
+  - name: "Install Pip"
+    apt:
+      name: pip
+      state: "present"
+
   - name: Make sure pymysql is present
     pip:
       name: pymysql
