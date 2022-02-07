@@ -19,6 +19,7 @@
   - name: Create a new database 'zabbix'
     community.mysql.mysql_db:
       name: root
+      login_unix_socket: /var/run/mysqld/mysqld.sock
       encoding: utf8
       collation: utf8_bin
       state: present
