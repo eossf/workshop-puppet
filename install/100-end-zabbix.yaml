@@ -1,0 +1,10 @@
+---
+- name: Post configuration Zabbix MariaDB
+  hosts: all
+  become: true
+  gather_facts: false
+  vars:
+
+  tasks:
+  - name: "Set DBPassword"
+    command: "echo >> /etc/zabbix/zabbix_server.conf ; echo 'DBPassword=password' >> /etc/zabbix/zabbix_server.conf"
