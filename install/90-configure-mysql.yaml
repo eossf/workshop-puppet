@@ -6,11 +6,6 @@
   vars:
 
   tasks:
-  - name: Install Pip
-    apt:
-      name: pip
-      state: present
-  
   - name: "Install Pip"
     apt:
       name: pip
