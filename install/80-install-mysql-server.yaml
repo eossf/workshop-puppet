@@ -35,3 +35,4 @@
 
   - name: "Restart {{ package_name }} {{ package_version }}"
     service: name=mysql state=restarted
+
