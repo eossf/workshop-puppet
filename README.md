@@ -136,7 +136,17 @@ puppetserver ca clean --certname agent01.local.vm
 ### Step 1 - install zabbix server
 ````
 ansible-playbook -i hosts --limit zabbix_server 70-install-zabbix-server.yaml
+ansible-playbook -i hosts --limit zabbix_server 80-install-mysql-server.yaml
+ansible-playbook -i hosts --limit zabbix_server 90-configure-mysql.yaml
+ansible-playbook -i hosts --limit zabbix_server 100-end-zabbix.yaml
 ````
+
+### Step 2 - go into the frontend
+
+http://localhost:5000/zabbix
+Click on each steps
+Login   : Admin
+password: zabbix
 
 ## Development / PDK
 ````
