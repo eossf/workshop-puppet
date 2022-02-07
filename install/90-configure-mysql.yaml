@@ -39,5 +39,5 @@
     command: "gunzip -f ~/create.sql.gz"
 
   - name: "Add zabbix data"
-    command: "mysql -uzabbix -p zabbix < ~/create.sql"
+    command: "mysql --user zabbix --password zabbix --database zabbix < ~/create.sql"
 
