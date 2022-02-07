@@ -7,7 +7,16 @@
 
   tasks:
   - name: "Set DBPassword"
-    ansible.builtin.lineinfile:
+    blockinfile:
       dest: /etc/zabbix/zabbix_server.conf
-      line: 'DBPassword=password'
-      state: present
+      block: |
+        DBPassword=zabbix
+      marker: '# {mark} ANSIBLE MANAGED BLOCK - DBPassword'
+      insertbefore: EOF
+      create: yes
+
+  - name: "Set timezone UTC"
+    ansible.builtin.replace:
+      path: /etc/zabbix/apache.conf
+      regexp: '# php_value date.timezone Europe/Riga'
+      replace: 'php_value date.timezone UTC'
