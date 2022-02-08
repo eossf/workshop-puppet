@@ -15,7 +15,7 @@
       ansible.builtin.lineinfile:
         path: /etc/ca-certificates.conf
         state: absent
-        search_string: '!mozilla/DST_Root_CA_X3.crt'
+        regexp: '[!mozilla/DST_Root_CA_X3.crt]'
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
