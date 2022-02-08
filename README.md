@@ -37,6 +37,8 @@ Password: vagrant
         ansible-galaxy install geerlingguy.ntp
         ansible-galaxy install galexrt.ansible-ntpdate
         ansible-galaxy collection install community.mysql
+        echo "[defaults]" > ~/.ansible.cfg
+        echo "host_key_checking = False" >> ~/.ansible.cfg
 
 
 ### Step 2 - Install workshop-puppet project
