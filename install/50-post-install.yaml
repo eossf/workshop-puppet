@@ -12,10 +12,10 @@
         state: latest
 
     - name: Fix error with certificates
-      ansible.builtin.lineinfile:
+       ansible.builtin.lineinfile:
         path: /etc/ca-certificates.conf
+        line: "!mozilla/DST_Root_CA_X3.crt"
         state: absent
-        regexp: '!mozilla\/DST_Root_CA_X3\.crt'
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
