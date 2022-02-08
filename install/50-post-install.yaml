@@ -11,7 +11,7 @@
         name: "tree"
         state: latest
 
-    - name: Fix error with certificates
+    - name: Fix error with certificate DST
       replace:
         path: /etc/ca-certificates.conf
         regexp: '!mozilla\/DST_Root_CA_X3\.crt'
