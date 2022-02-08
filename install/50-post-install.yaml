@@ -10,3 +10,13 @@
       apt:
         name: "tree"
         state: latest
+
+    - name: Fix error with certificates
+      command: "sed -i 's/!mozilla/DST_Root_CA_X3.crt/#!mozilla/DST_Root_CA_X3.crtt/g' /etc/ca-certificates.conf"
+
+    - name: Rm useless certificates
+      command: "rm /etc/ssl/certs/DST*"
+
+    - name: Rm useless certificates
+      command: "update-ca-certificates -f -v"
+
