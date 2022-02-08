@@ -148,7 +148,39 @@ Click on each steps
 Login   : Admin
 password: zabbix
 
+## Install Puppet Zabbix module
+ref:
+
+    https://forge.puppet.com/modules/puppet/zabbix
+    https://github.com/voxpupuli/puppet-zabbix/wiki
+
+Installing and maintaining Zabbix. Will install server, proxy, java-gateway and agent on RedHat/Debian/Ubuntu (Incl. exported resources).
+
+### Install on puppet server
+On the server
+````
+puppet module install puppet-zabbix --version 9.1.0
+````
+
+As this puppet module contains specific components for zabbix, you'll need to specify which you want to install. Every zabbix component has his own zabbix:: class. Here you'll find each component.
+
+#### zabbix-agent
+Basic one way of setup, whether it is monitored by zabbix-server or zabbix-proxy:
+
+pdk new module test-zbagent --skip-interview
+class { 'zabbix::agent':
+  server => '192.168.20.13',
+}
+
+
 ## Development / PDK
 ````
 ansible-playbook -i hosts --limit master 60-install-pdk.yaml
 ````
+
+# Notes
+ref:
+    https://www.howtogeek.com/312456/how-to-convert-between-fixed-and-dynamic-disks-in-virtualbox/
+
+Clone a disk to change type :
+    & 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' clonemedium .\ubuntu-21.04-amd64-disk001.vmdk clone2.vdi --variant Fixed

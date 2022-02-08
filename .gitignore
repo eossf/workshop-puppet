@@ -1,0 +1,4 @@
+.vagrant
+install/.vagrant
+workshop-puppet/install/.vagrant
+workshop-puppet/README.md.bak

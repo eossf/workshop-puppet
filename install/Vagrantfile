@@ -31,19 +31,23 @@ servers=[
 
 Vagrant.configure(2) do |config|
   servers.each do |machine|
-      config.vm.define machine[:hostname] do |node|
-          node.vm.box = machine[:box]
-          node.vm.hostname = machine[:hostname]
-          if machine[:hostname] == "zabbix.local.vm" then
-            node.vm.network "forwarded_port", guest:80 , host:5000
-          end
-          node.vm.network "private_network", ip: machine[:ip]
-          node.vm.provider "virtualbox" do |vb|
-              vb.customize ['modifyvm', :id, '--memory', machine[:ram]]
-              vb.customize ['modifyvm', :id, '--graphicscontroller', 'vmsvga']
-              vb.customize ['modifyvm', :id, '--vram', '24']
-              vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
-          end
-      end
+    config.vm.define machine[:hostname] do |node|
+        node.vm.box = machine[:box]
+        node.vm.hostname = machine[:hostname]
+        if machine[:hostname] == "zabbix.local.vm" then
+          node.vm.network "forwarded_port", guest:80 , host:5000
+          config.disksize.size = '20GB'
+        end
+        if machine[:hostname] == "master.local.vm" then
+          config.disksize.size = '20GB'
+        end
+        node.vm.network "private_network", ip: machine[:ip]
+        node.vm.provider "virtualbox" do |vb|
+            vb.customize ['modifyvm', :id, '--memory', machine[:ram]]
+            vb.customize ['modifyvm', :id, '--graphicscontroller', 'vmsvga']
+            vb.customize ['modifyvm', :id, '--vram', '24']
+            vb.customize ['modifyvm', :id, '--nested-hw-virt', 'on']
+        end
+    end
   end
 end
