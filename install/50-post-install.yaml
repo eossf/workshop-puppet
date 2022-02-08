@@ -12,7 +12,10 @@
         state: latest
 
     - name: Fix error with certificates
-      command: "sed -i 's/!mozilla/DST_Root_CA_X3.crt/#!mozilla/DST_Root_CA_X3.crtt/g' /etc/ca-certificates.conf"
+      ansible.builtin.lineinfile:
+        path: /etc/ca-certificates.conf
+        state: absent
+        search_string: '!mozilla/DST_Root_CA_X3.crt'
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
