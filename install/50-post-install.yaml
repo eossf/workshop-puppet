@@ -14,9 +14,8 @@
     - name: Fix error with certificates
       replace:
         path: /etc/ca-certificates.conf
-        regexp: '(\s+)!mozilla\/DST_Root_CA_X3\.crt(\s+.*)?$'
-        replace: '#'
-        backup: yes
+        regexp: '!mozilla\/DST_Root_CA_X3\.crt'
+        replace: ''
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
