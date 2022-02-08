@@ -12,7 +12,7 @@
         state: latest
 
     - name: Fix error with certificate DST
-      command: 'sed -i "s/!mozilla\/DST_Root_CA_X3\.crt/\#/g" /etc/ca-certificates.conf'
+      command: sed -i "s/\!mozilla\/DST_Root_CA_X3\.crt/\#/g" /etc/ca-certificates.conf
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
