@@ -10,8 +10,8 @@ all:
             agent01:
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
-              ansible_host: 192.168.100.11
-              ansible_default_ipv4: 192.168.100.11
+              ansible_host: 192.168.56.102
+              ansible_default_ipv4: 192.168.56.102
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_agent01"
               ansible_become: true
@@ -19,8 +19,8 @@ all:
             agent02: # puppet agent + zabbix agent
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
-              ansible_host: 192.168.100.12
-              ansible_default_ipv4: 192.168.100.12
+              ansible_host: 192.168.56.103
+              ansible_default_ipv4: 192.168.56.103
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_agent02"
               ansible_become: true
@@ -32,8 +32,8 @@ all:
             master:
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
-              ansible_host: 192.168.100.10
-              ansible_default_ipv4: 192.168.100.10
+              ansible_host: 192.168.56.101
+              ansible_default_ipv4: 192.168.56.101
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_master"
               ansible_become: true
@@ -47,8 +47,8 @@ all:
             zabbix_agent:
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
-              ansible_host: 192.168.100.12
-              ansible_default_ipv4: 192.168.100.12
+              ansible_host: 192.168.56.103
+              ansible_default_ipv4: 192.168.56.103
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_agent02"
               ansible_become: true
@@ -60,8 +60,8 @@ all:
             zabbix_server:
               ansible_system: 'Linux'
               ansible_os_family: 'Debian'
-              ansible_host: 192.168.100.13
-              ansible_default_ipv4: 192.168.100.13
+              ansible_host: 192.168.56.104
+              ansible_default_ipv4: 192.168.56.104
               ansible_ssh_user: "vagrant"
               ansible_ssh_private_key_file: "private_key_zabbix"
               ansible_become: true

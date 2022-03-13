@@ -17,8 +17,8 @@ sudo hostnamectl set-hostname master.local.vm
 # sudo nano /etc/hosts
 sudo cp /etc/hosts /etc/hosts.old
 sudo bash -c "sed -i 's/127.0.0.1 localhost/127.0.0.1 master.local.vm puppet localhost/g' /etc/hosts"
-sudo bash -c "echo '192.168.100.10 master.local.vm' >> /etc/hosts"
-sudo bash -c "echo '192.168.100.11 agent01.local.vm' >> /etc/hosts"
+sudo bash -c "echo '192.168.1.101 master.local.vm' >> /etc/hosts"
+sudo bash -c "echo '192.168.1.102 agent01.local.vm' >> /etc/hosts"
 
 # service 
 sudo systemctl restart puppetserver
@@ -70,8 +70,8 @@ sudo hostnamectl set-hostname agent01.local.vm
 # replace /etc/hosts
 sudo cp /etc/hosts /etc/hosts.old
 sudo bash -c "sed -i 's/127.0.0.1 localhost/127.0.0.1 agent01.local.vm localhost/g' /etc/hosts"
-sudo bash -c "echo '192.168.100.10 master.local.vm puppet' >> /etc/hosts"
-sudo bash -c "echo '192.168.100.11 agent01.local.vm' >> /etc/hosts"
+sudo bash -c "echo '192.168.1.101 master.local.vm puppet' >> /etc/hosts"
+sudo bash -c "echo '192.168.1.102 agent01.local.vm' >> /etc/hosts"
 
 # service 
 sudo systemctl restart puppetserver 

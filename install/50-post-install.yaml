@@ -16,4 +16,3 @@
 
     - name: Rm useless certificates
       command: "update-ca-certificates -f -v"
-
